@@ -34,7 +34,7 @@ function nameAnim(){
 	if(cLet >= name.length){dir = -1;cLet = name.length - 1;}
 	if(cLet < 0){dir = 1;cLet = 1;}
 	for(var j = 0;j < name.length;j++){	nameLet[j].style.color = 'green';
-	nameLet[j].style.background = 'white';}
+	nameLet[j].style.background = 'black';}
 	nameLet[cLet].style.background = 'yellow';
 	nameLet[cLet].style.color = 'white';
 	cLet += dir;

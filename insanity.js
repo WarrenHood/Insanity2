@@ -42,7 +42,7 @@ function nameAnim(){
 }
 function lev(n){
 	var blocks = gbid('grid').getElementsByTagName('td');
-	var levs = [[3,150],[3,100],[4,80],[4,50],[5,40],[5,30],[6,20],[6,10],[7,5],[7,1],[8,0.5],[8,0.05],[8,0.01] ];
+	var levs = [[3,400],[3,300],[4,200],[4,150],[5,100],[5,50],[6,20],[6,10],[7,5],[7,1],[8,0.5],[8,0.05],[8,0.01] ];
 	if(n >= levs.length){alert('Congratulations! You have completed the game!');n = levs.length-1;
 	if(confirm("Restart from level 1?")){localStorage.level = 1;level = 1; n = 0;}
 	}

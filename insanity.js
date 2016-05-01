@@ -5,11 +5,12 @@ swapInterval = 500;
 function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
+	var counter = 0;
 	levCompletionCheck();
 	var b1 = Math.floor(Math.random()*numBlocks);
 	var b2 = Math.floor(Math.random()*numBlocks);
-	while((b2 == b1) || colAt(b1) == colAt(b2) )b1 =Math.floor(Math.random()*numBlocks);
-	swap(b1,b2);
+	while(((b2 == b1) || colAt(b1) == colAt(b2)) && counter < 10 ){b1 =Math.floor(Math.random()*numBlocks);counter++}
+	if(counter < 10)swap(b1,b2);
 	setTimeout(animate,swapInterval);
 }
 window.onload = function(){

@@ -105,7 +105,7 @@ function levCompletionCheck(){
 	for(var i = 0; i < numBlocks;i++){
 		if(colAt(i) == 'red')completed = false;}
 	if(completed){alert('Level '+ level+ ' complete');
-	alert('Copy and paste this and send it to me:\n\n'+array);
+	//alert('Copy and paste this and send it to me:\n\n'+array);
 	localStorage.level++;
 	level = localStorage.level;
 	lev(level-1);}

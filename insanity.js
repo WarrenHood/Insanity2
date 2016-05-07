@@ -12,8 +12,8 @@ dumpCount = 1;
 function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
-	//dumpData();
-	//dumpCount++;
+	dumpData();
+	dumpCount++;
 	var counter = 0;
 	levCompletionCheck();
 	var b1 = Math.floor(Math.random()*numBlocks);
@@ -105,6 +105,7 @@ function levCompletionCheck(){
 	for(var i = 0; i < numBlocks;i++){
 		if(colAt(i) == 'red')completed = false;}
 	if(completed){alert('Level '+ level+ ' complete');
+	alert('Copy and paste this and send it to me:\n\n'+array);
 	localStorage.level++;
 	level = localStorage.level;
 	lev(level-1);}

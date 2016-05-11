@@ -2,18 +2,9 @@ localStorage.level = localStorage.level || 1;
 level = localStorage.level;
 alert('Insanity created by Warren Hood \nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
 swapInterval = 500;
-array = [];
-function dumpData(){
-	var field = [];
-	for(var i = 0;i < numBlocks;i++)field.push(colAt(i));
-	array.push([field,'storageLev:'+localStorage.level,'level:'+level,'numberOfBlocks:'+numBlocks]);
-}
-dumpCount = 1;
 function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
-	dumpData();
-	dumpCount++;
 	var counter = 0;
 	levCompletionCheck();
 	var b1 = Math.floor(Math.random()*numBlocks);
@@ -101,12 +92,9 @@ function check(e){
 	else e.target.style.background = 'red';
 }
 function levCompletionCheck(){
-	completed = true;
-	for(var i = 0; i < numBlocks;i++){
-		if(colAt(i) == 'red')completed = false;}
-	if(completed){alert('Level '+ level+ ' complete');
-	//alert('Copy and paste this and send it to me:\n\n'+array);
+	for(var i = 0; i < numBlocks;i++)if(colAt(i) == 'red')return;
+	alert('Level '+ level+ ' complete');
 	localStorage.level++;
 	level = localStorage.level;
-	lev(level-1);}
+	lev(level-1);
 }

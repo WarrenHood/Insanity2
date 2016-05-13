@@ -86,7 +86,7 @@ function swap(a,b){
 	blocks[b].style.background = ca;
 }
 function colAt(x){
-	var blocks = gbid('grid').getElementsByTagName('td');
+	var blocks=gbid('grid').getElementsByTagName('td');
 	return blocks[x].style.background;
 }
 function check(e){

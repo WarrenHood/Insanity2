@@ -1,3 +1,19 @@
+Skip to content
+  Switch to mobile version
+This repository
+Pull requests
+Issues
+Gist
+ @WarrenHood
+ Unwatch 1
+  Star 0
+  Fork 0 WarrenHood/Insanity2
+ Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs  Settings
+Tree: 1dac26a35e Find file Insanity2/insanity.js
+1dac26a  20 days ago
+@WarrenHood WarrenHood Update insanity.js
+1 contributor
+RawBlameHistory    104 lines (101 sloc)  3.68 KB
 localStorage.level = localStorage.level || 1;
 numBlocks = 9;
 if(!localStorage.played)localStorage.level = 1;
@@ -86,7 +102,7 @@ function swap(a,b){
 	blocks[b].style.background = ca;
 }
 function colAt(x){
-	var blocks=gbid('grid').getElementsByTagName('td');
+	var blocks = gbid('grid').getElementsByTagName('td');
 	return blocks[x].style.background;
 }
 function check(e){
@@ -95,12 +111,9 @@ function check(e){
 	else e.target.style.background = 'red';
 }
 function levCompletionCheck(){
-	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red')return;
-alert (colAt (i));
-}
-
-	/*alert('Level '+ level+ ' complete');
+	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red')return;}
+	alert('Level '+ level+ ' complete');
 	localStorage.level++;
 	level = localStorage.level;
-	lev(level-1);*/
+	lev(level-1);
 }

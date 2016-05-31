@@ -1,19 +1,4 @@
-Skip to content
-  Switch to mobile version
-This repository
-Pull requests
-Issues
-Gist
- @WarrenHood
- Unwatch 1
-  Star 0
-  Fork 0 WarrenHood/Insanity2
- Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs  Settings
-Tree: 1dac26a35e Find file Insanity2/insanity.js
-1dac26a  20 days ago
-@WarrenHood WarrenHood Update insanity.js
-1 contributor
-RawBlameHistory    104 lines (101 sloc)  3.68 KB
+
 localStorage.level = localStorage.level || 1;
 numBlocks = 9;
 if(!localStorage.played)localStorage.level = 1;

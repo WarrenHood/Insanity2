@@ -87,7 +87,7 @@ function swap(a,b){
 }
 function colAt(x){
 	var blocks = gbid('grid').getElementsByTagName('td');
-	return blocks[x].style.background;
+	return extractCol(blocks[x].style.background);
 }
 function check(e){
 	e = e || event;
@@ -102,4 +102,11 @@ function levCompletionCheck(){
 	localStorage.level++;
 	level = localStorage.level;
 	lev(level-1);}
+}
+function extractCol(c){
+	colors = ['red','orange','yellow','green','blue','purple','pink'];
+	for(i = 0;i<colors.length;i++){
+		if(c.includes(colors[i]))return colors[i];
+	}
+	return c;
 }

@@ -1,9 +1,10 @@
 localStorage.level = localStorage.level || 1;
+numBlocks = 9;
+if(!localStorage.played)localStorage.level = 1;
 level = localStorage.level;
 version = '0.0.2';
 alert('Insanity Version '+version+'\nCreated by Warren Hood\n\n Bugs Fixed:\nLevels complete by themselves on some phones\nGame does not fit on screen\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
 swapInterval = 500;
-
 function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
@@ -17,6 +18,7 @@ function animate(){
 }
 window.onload = function(){
 	gbid('version').innerHTML = version;
+	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = screen.width;
 	if(size > screen.height)size = screen.height;
@@ -55,7 +57,7 @@ function lev(n){
 	swapInterval = levs[n][1];
 	var size = screen.width;
 	if(size > screen.height)size = screen.height;
-	size = Math.floor(size *0.7 / levs[n][0])-n;
+	size = Math.floor(size *0.7 / levs[n][0]);
 	setGrids(levs[n][0],size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
@@ -63,7 +65,7 @@ function lev(n){
 }
 function setGrids(n,s){
 	numBlocks = Math.pow(n,2);
-	var elt =''
+	var elt ='';
 	for(var i = 0; i < n;i++ ){
 		elt += '<tr>';
 		for(var j =0;j<n;j++)elt += '<td style="height:'+s+'px;width:'+s+'px;background:'+randColX()+'"></td>';
@@ -79,30 +81,33 @@ function setCol(n,c){
 	blocks[n].style.background = c;
 }
 function swap(a,b){
-	var blocks = gbid('grid').getElementsByTagName('td');
+	var blocks = gbid('grid').getElementsByTagName("td");
 	var ca = blocks[a].style.background;
 	var cb = blocks[b].style.background;
 	blocks[a].style.background = cb;
 	blocks[b].style.background = ca;
 }
 function colAt(x){
-	var blocks = gbid('grid').getElementsByTagName('td');
-	return extractCol(blocks[x].style.background);
+	var blocks = gbid('grid').getElementsByTagName("td");
+	for(var i = 0; i < colors.length;i++){
+		if(colors[i] == extractCol(blocks[x].style.background))return colors[i];
+	}
+
 }
 function check(e){
-	e = e || event;
-	if(e.target.style.background.includes('red') || e.target.style.background == 'red')e.target.style.background = randColX();
-	else e.target.style.background = 'red';
+	e = e || event || window.event;
+	var target = e.target || e.srcElement;
+	if(target.style.background == "red")target.style.background = randColX();
+	else target.style.background = "red";
 }
 function levCompletionCheck(){
-	completed = true;
-	for(var i = 0; i < numBlocks;i++){
-		if( colAt(i).includes('red') || colAt(i) == 'red')completed = false;}
-	if(completed){alert('Level '+ level+ ' complete');
+	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red')return;}
+	alert('Level '+ level+ ' complete');
 	localStorage.level++;
 	level = localStorage.level;
-	lev(level-1);}
+	lev(level-1);
 }
+colors = ['red','orange','yellow','green','blue','purple','pink'];
 function extractCol(c){
 	colors = ['red','orange','yellow','green','blue','purple','pink'];
 	for(i = 0;i<colors.length;i++){

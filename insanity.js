@@ -1,7 +1,7 @@
 localStorage.level = localStorage.level || 1;
 level = localStorage.level;
 version = '0.0.2';
-alert('Insanity Version '+version+' created by Warren Hood \nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
+alert('Insanity Version '+version+'\nCreated by Warren Hood\n\n Bugs Fixed:\nLevels complete by themselves on some phones\nGame does not fit on screen\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
 swapInterval = 500;
 
 function gbid(x){return document.getElementById(x);}

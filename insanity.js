@@ -92,12 +92,12 @@ function randColX(){
 }
 function setCol(n,c){
 	var blocks = gbid('grid').getElementsByTagName('td');
-	blocks[n].style.background = c;
+	blocks[n].style.background = extractCol(c);
 }
 function swap(a,b){
 	var blocks = gbid('grid').getElementsByTagName("td");
-	var ca = blocks[a].style.background;
-	var cb = blocks[b].style.background;
+	var ca = extractCol(blocks[a].style.background);
+	var cb = extractCol(blocks[b].style.background);
 	blocks[a].style.background = cb;
 	blocks[b].style.background = ca;
 }
@@ -114,7 +114,7 @@ function check(e){
 	else target.style.background = "red";
 }
 function levCompletionCheck(){
-	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red'|| extractCol(colAt(i))=='red' )return;}
+	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red' )return;}
 	alert('Level '+ level+ ' complete');
 	localStorage.level++;
 	level = localStorage.level;

@@ -5,6 +5,20 @@ level = localStorage.level;
 version = '0.0.2';
 alert('Insanity Version '+version+'\nCreated by Warren Hood\n\n Bugs Fixed:\nLevels complete by themselves on some phones\nGame does not fit on screen\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
 swapInterval = 500;
+if (!String.prototype.includes) {
+  String.prototype.includes = function(search, start) {
+    'use strict';
+    if (typeof start !== 'number') {
+      start = 0;
+    }
+    
+    if (start + search.length > this.length) {
+      return false;
+    } else {
+      return this.indexOf(search, start) !== -1;
+    }
+  };
+}
 function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
@@ -90,17 +104,17 @@ function swap(a,b){
 function colAt(x){
 	var blocks = gbid('grid').getElementsByTagName("td");
 	for(var i = 0; i < colors.length;i++){
-		if(colors[i] == blocks[x].style.background)return colors[i];
+		if(colors[i] == blocks[x].style.background || extractCol(blocks[x].style.background ) == colors[i])return colors[i];
 	}
 }
 function check(e){
 	e = e || event || window.event;
 	var target = e.target || e.srcElement;
-	if(target.style.background == "red")target.style.background = randColX();
+	if(target.style.background == "red" || extractCol(target.style.background) == 'red' )target.style.background = randColX();
 	else target.style.background = "red";
 }
 function levCompletionCheck(){
-	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red')return;}
+	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red'|| extractCol(colAt(i))=='red' )return;}
 	alert('Level '+ level+ ' complete');
 	localStorage.level++;
 	level = localStorage.level;

@@ -90,9 +90,8 @@ function swap(a,b){
 function colAt(x){
 	var blocks = gbid('grid').getElementsByTagName("td");
 	for(var i = 0; i < colors.length;i++){
-		if(colors[i] == extractCol(blocks[x].style.background))return colors[i];
+		if(colors[i] == blocks[x].style.background)return colors[i];
 	}
-
 }
 function check(e){
 	e = e || event || window.event;

@@ -91,13 +91,13 @@ function colAt(x){
 }
 function check(e){
 	e = e || event;
-	if(e.target.style.background.includes('red'))e.target.style.background = randColX();
+	if(e.target.style.background.includes('red') || e.target.style.background == 'red')e.target.style.background = randColX();
 	else e.target.style.background = 'red';
 }
 function levCompletionCheck(){
 	completed = true;
 	for(var i = 0; i < numBlocks;i++){
-		if( colAt(i).includes('red'))completed = false;}
+		if( colAt(i).includes('red') || colAt(i) == 'red')completed = false;}
 	if(completed){alert('Level '+ level+ ' complete');
 	localStorage.level++;
 	level = localStorage.level;

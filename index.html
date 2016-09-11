@@ -1,6 +1,9 @@
 <html>
 <head><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <style>
+body{
+background:black;
+}
 .active{
 background:green;
 border:1px solid black;
@@ -50,7 +53,7 @@ function g(n){return document.getElementById(n);}
 </script>
 </head>
 <body>
-<iframe id='playfield' src='0.0.1/index.html' style='height:80%;width:100%;'></iframe>
+<iframe id='playfield' src='0.0.1/index.html' style='height:100%;width:100%;overflow:auto;' scroll='auto'></iframe>
 <center>
 <div id='help'>Help</div>
 <div class='active' id='normal'>Normal Mode</div>

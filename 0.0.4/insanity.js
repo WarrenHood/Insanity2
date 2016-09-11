@@ -40,7 +40,7 @@ window.onload = function(){
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = screen.width;
 	if(size > screen.height)size = screen.height;
-	size *= 0.8;
+	size *= 0.7;
 	lev(level4-1);
 	name = gbid('name').innerHTML;
 	text = '';
@@ -93,14 +93,16 @@ function lev(n){
 		
 	}
 	shuffle();
+	console.log(size);
+	console.log(size*Math.sqrt(numBlocks));
 }
 function setGrids(n,s){
 	numBlocks = Math.pow(n,2);
 	rows = n;
 	var elt ='';
 	for(var i = 0; i < n;i++ ){
-		elt += '<tr>';
-		for(var j =0;j<n;j++)elt += '<td id="'+blockNum(i,j)+'" style="height:'+s+'px;width:'+s+'px;background:'+randColX()+'"></td>';
+		elt += '<tr style="max-height:'+s+';">';
+		for(var j =0;j<n;j++)elt += '<td onmousedown="javascript:currentBlock = '+blockNum(i,j)+'" style="height:'+s+'px;width:'+s+'px;background:'+randColX()+'"></td>';
 	elt += '</tr>';
 	}
 	grid.innerHTML = elt;
@@ -128,9 +130,6 @@ function colAt(x){
 function check(e){
 	e = e || event || window.event;
 	var target = e.target || e.srcElement;
-	for(var i=0;i<numBlocks;i++){
-		if(document.getElementById(i) == target)currentBlock = i;
-	}
 	direction = null;
 	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1)direction = 'v';
 	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1)direction = 'h';

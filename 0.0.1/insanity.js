@@ -36,7 +36,7 @@ window.onload = function(){
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = screen.width;
 	if(size > screen.height)size = screen.height;
-	size *= 0.8;
+	size *= 0.7;
 	lev(level-1);
 	name = gbid('name').innerHTML;
 	text = '';
@@ -76,13 +76,15 @@ function lev(n){
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
 	shuffle();
+	console.log(size);
+	console.log(size*Math.sqrt(numBlocks));
 }
 function setGrids(n,s){
 	numBlocks = Math.pow(n,2);
 	var elt ='';
 	for(var i = 0; i < n;i++ ){
-		elt += '<tr>';
-		for(var j =0;j<n;j++)elt += '<td style="height:'+s+'px;width:'+s+'px;background:'+randColX()+'"></td>';
+		elt += '<tr height="'+s+'">';
+		for(var j =0;j<n;j++)elt += '<td onmousedown="javascript:currentBlock = '+blockNum(i,j)+'" style="min-height:'+s+'px;min-width:'+s+'px;background:'+randColX()+'"></td>';
 	elt += '</tr>';
 	}
 	grid.innerHTML = elt;

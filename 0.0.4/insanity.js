@@ -130,7 +130,8 @@ function colAt(x){
 function check(e){
 	e = e || event || window.event;
 	var target = e.target || e.srcElement;
-	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = target;
+	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = i;
+	if(!currentBlock)currentBlock = target.id;
 	direction = null;
 	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1)direction = 'v';
 	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1)direction = 'h';

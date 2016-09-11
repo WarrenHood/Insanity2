@@ -1,21 +1,65 @@
-
 <html>
-<head>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <style>
-body{height:100%;
-	width:100%;
-	background:black;}
-#grid{
-	border:1px solid black;
+body{
+background:black;
 }
-
-
+.active{
+background:green;
+border:1px solid black;
+height:4%;
+color:white;
+}
+.inactive{
+background:red;
+border:1px solid black;
+height:4%;
+}
+#help{
+background:lightblue;
+border:1px solid grey;
+height:4%;
+}
 </style>
-<script type='text/javascript' src='insanity.js'></script>
+<script type='text/javascript'>
+version = '0.0.3';
+alert('Insanity Version '+version+'\nCreated by Warren Hood\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
+window.onload = function(){
+	msg = 'Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.';
+	playfield = g('playfield');
+	g('normal').onclick = function(){load(1);}
+	g('puzzle1').onclick = function(){load(2);}
+	g('puzzle2').onclick = function(){load(3);}
+	g('help').onclick = function(){alert(msg);}
+}
+function load(x){
+	if(x == 1){playfield.src = '0.0.1/index.html';enable('normal');
+			msg = 'Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.';
+	}
+	if(x == 2){playfield.src = '0.0.3/index.html';enable('puzzle1');
+			msg = 'Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.';
+	}
+	if(x == 3){playfield.src = '0.0.4/index.html';enable('puzzle2');
+			msg = 'Insanity Puzzle Mode(Dynamic)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful';
+	}
+}
+function enable(n){
+	g('normal').className = 'inactive';
+	g('puzzle1').className = 'inactive';
+	g('puzzle2').className = 'inactive';
+	g(n).className = 'active';
+}
+function g(n){return document.getElementById(n);}
+</script>
 </head>
 <body>
-<center><h3 style='color:green;'><span id='name'>Insanity</span>(Level <span id='lv'></span>) V<span id='version'>0.0.2</span></h3></center>
-<center><table id='grid'></table></center><br><br>
-<center><button onclick='if(confirm("Do you really wanna restart from lv1? click cancel if u dont.")){level = 1;localStorage.level = 1;lev(0);}'>Restart from level 1</button></center>
+<iframe id='playfield' src='0.0.1/index.html' style='height:100%;width:100%;overflow:auto;' scroll='auto'></iframe>
+<center>
+<div id='help'>Help</div>
+<div class='active' id='normal'>Normal Mode</div>
+<div class ='inactive' id='puzzle1'>Puzzle Mode(Easy)</div>
+<div class ='inactive' id='puzzle2'>Puzzle Mode(Hard)</div>
+
+</center>
 </body>
 </html>

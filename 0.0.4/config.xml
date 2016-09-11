@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns   = ""
         xmlns:gap   = ""
-        id          = "com.warren.insanity"
+        id          = "Insanity"
         versionCode = "001" 
-        version     = "0.0.3" >
+        version     = "0.0.1" >
 
     <!-- versionCode is optional and Android only -->
 
@@ -13,7 +13,7 @@
         A game that will make you go insane. Basically tap red blocks to change their colour.By tapping a non-red block it will become red.Objective: Eliminate all red blocks.
     </description>
 
-    <author href="www.facebook.com/warren.hood.750" email="nullbyte001@gmail.com">
+    <author href="" email="nullbyte001@gmail.com">
         Warren Hood
     </author>
 	<preference name="DisallowOverscroll" value="true" />

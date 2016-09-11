@@ -1,21 +1,46 @@
-
 <html>
-<head>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <style>
-body{height:100%;
-	width:100%;
-	background:black;}
-#grid{
-	border:1px solid black;
+.active{
+background:green;
+border:1px solid black;
+height:5%;
 }
-
-
+.inactive{
+background:red;
+border:1px solid black;
+height:5%;
+}
 </style>
-<script type='text/javascript' src='insanity.js'></script>
+<script type='text/javascript'>
+version = '0.0.3';
+alert('Insanity Version '+version+'\nCreated by Warren Hood\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
+window.onload = function(){
+	playfield = g('playfield');
+	g('normal').onclick = function(){load(1);}
+	g('puzzle1').onclick = function(){load(2);}
+	g('puzzle2').onclick = function(){load(3);}
+}
+function load(x){
+	if(x == 1){playfield.src = '0.0.1/index.html';enable('normal');}
+	if(x == 2){playfield.src = '0.0.3/index.html';enable('puzzle1');}
+	if(x == 3){playfield.src = '0.0.4/index.html';enable('puzzle2');}
+}
+function enable(n){
+	g('normal').className = 'inactive';
+	g('puzzle1').className = 'inactive';
+	g('puzzle2').className = 'inactive';
+	g(n).className = 'active';
+}
+function g(n){return document.getElementById(n);}
+</script>
 </head>
 <body>
-<center><h3 style='color:green;'><span id='name'>Insanity</span>(Level <span id='lv'></span>) V<span id='version'>0.0.2</span></h3></center>
-<center><table id='grid'></table></center><br><br>
-<center><button onclick='if(confirm("Do you really wanna restart from lv1? click cancel if u dont.")){level = 1;localStorage.level = 1;lev(0);}'>Restart from level 1</button></center>
+<iframe id='playfield' src='0.0.1/index.html' style='height:80%;width:100%;'></iframe>
+<center>
+<div class='active' id='normal'>Normal Mode</div>
+<div class ='inactive' id='puzzle1'>Puzzle Mode(Easy)</div>
+<div class ='inactive' id='puzzle2'>Puzzle Mode(Hard)</div>
+</center>
 </body>
 </html>

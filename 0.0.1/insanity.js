@@ -42,8 +42,6 @@ window.onload = function(){
 	text = '';
 	cLet = 0;
 	dir = 1;
-	gbid('container').style.width = screen.width*0.7+'px';
-	gbid('container').style.height = screen.width*0.7+'px';
 	for(var i = 0; i < name.length;i++)text += '<span class="let">'+name[i]+'</span>';
 	gbid('name').innerHTML = text;
 	setInterval(nameAnim,50);

@@ -6,20 +6,6 @@ level3 = localStorage.level3;
 version = '0.0.3';
 //alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
 swapInterval = 500;
-if (!String.prototype.includes) {
-  String.prototype.includes = function(search, start) {
-    'use strict';
-    if (typeof start !== 'number') {
-      start = 0;
-    }
-    
-    if (start + search.length > this.length) {
-      return false;
-    } else {
-      return this.indexOf(search, start) !== -1;
-    }
-  };
-}
 function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
@@ -124,7 +110,7 @@ function swap(a,b){
 function colAt(x){
 	var blocks = gbid('grid').getElementsByTagName("td");
 	for(var i = 0; i < colors.length;i++){
-		if(colors[i] == blocks[x].style.background || extractCol(blocks[x].style.background ) == colors[i])return colors[i];
+		if(colors[i] == blocks[x].style.background || extractCol(blocks[x].style.background == colors[i] ) == colors[i])return colors[i];
 	}
 }
 function check(e){
@@ -175,11 +161,12 @@ function levCompletionCheck(){
 }
 colors = ['red','orange','yellow','green','blue','purple','pink'];
 function extractCol(c){
+	str = ''+c;
 	colors = ['red','orange','yellow','green','blue','purple','pink'];
 	for(i = 0;i<colors.length;i++){
-		if(c.includes(colors[i]))return colors[i];
+		if(colors[i] == str || str.includes(colors[i]))return colors[i];
 	}
-	return c;
+	return str;
 }
 function blockNum(r,c){
 	return c + r*Math.sqrt(numBlocks);
@@ -226,3 +213,15 @@ function init() {
 
 init();
 })();
+ String.prototype.includes = function(search, start) {
+    'use strict';
+    if (typeof start !== 'number') {
+      start = 0;
+    }
+    
+    if (start + search.length > this.length) {
+      return false;
+    } else {
+      return this.indexOf(search, start) !== -1;
+    }
+  };

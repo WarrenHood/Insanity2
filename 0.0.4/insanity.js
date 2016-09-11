@@ -187,6 +187,7 @@ function shuffle(){
 	while(((b2 == b1) || colAt(b1) == colAt(b2)) && counter < 10 ){b1 = blockNum(1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)),1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)));counter++;}
 	if(counter < 100)swap(b1,b2);}
 }
+/*
 (function() {
 function init() {
     var mouseEventTypes = {
@@ -212,7 +213,7 @@ function init() {
 }
 
 init();
-})();
+})();*/
  String.prototype.includes = function(search, start) {
     'use strict';
     if (typeof start !== 'number') {

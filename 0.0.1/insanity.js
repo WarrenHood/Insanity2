@@ -3,7 +3,7 @@ numBlocks = 9;
 if(!localStorage.played)localStorage.level = 1;
 level = localStorage.level;
 version = '0.0.2';
-alert('Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.');
+//alert('Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.');
 swapInterval = 500;
 if (!String.prototype.includes) {
   String.prototype.includes = function(search, start) {
@@ -112,6 +112,7 @@ function check(e){
 	var target = e.target || e.srcElement;
 	if(target.style.background == "red" || extractCol(target.style.background) == 'red' )target.style.background = randColX();
 	else target.style.background = "red";
+	levCompletionCheck();
 }
 function levCompletionCheck(){
 	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red' )return;}

@@ -4,7 +4,7 @@ mode = 'static'
 if(!localStorage.played)localStorage.level3 = 1;
 level3 = localStorage.level3;
 version = '0.0.3';
-alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
+//alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
 swapInterval = 500;
 if (!String.prototype.includes) {
   String.prototype.includes = function(search, start) {
@@ -161,6 +161,7 @@ function check(e){
 		if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock)))) == 'red' )setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),randColX());
 			else setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),"red");
 	}
+	levCompletionCheck();
 	//if(target.style.background == "red" || extractCol(target.style.background) == 'red' )target.style.background = randColX();
 	//else target.style.background = "red";
 }

@@ -75,7 +75,7 @@ function lev(n){
 	swapInterval = levs[n][1];
 	var size = screen.width;
 	if(size > screen.height)size = screen.height;
-	size = Math.floor((size *0.7) / (levs[n][0])+2);
+	size = Math.floor((size *0.7) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
@@ -130,7 +130,7 @@ function colAt(x){
 function check(e){
 	e = e || event || window.event;
 	var target = e.target || e.srcElement;
-	//currentBlock = parseInt(target.ids);
+	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = target;
 	direction = null;
 	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1)direction = 'v';
 	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1)direction = 'h';
@@ -199,3 +199,29 @@ function shuffle(){
 	while(((b2 == b1) || colAt(b1) == colAt(b2)) && counter < 10 ){b1 = blockNum(1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)),1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)));counter++;}
 	if(counter < 100)swap(b1,b2);}
 }
+(function() {
+function init() {
+    var mouseEventTypes = {
+        touchstart : "mousedown",
+        touchmove : "mousemove",
+        touchend : "mouseup"
+    };
+
+    for (originalType in mouseEventTypes) {
+        document.addEventListener(originalType, function(originalEvent) {
+            if(originalEvent.type == 'click')
+                return;
+            if (originalEvent.type != 'touchstart' && originalEvent.type !='touchend'){
+                originalEvent.preventDefault();
+            }
+            event = document.createEvent("MouseEvents");
+            touch = originalEvent.changedTouches[0];
+            event.initMouseEvent(mouseEventTypes[originalEvent.type], true, true, window, 0, touch.screenX, touch.screenY, touch.clientX, touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey, touch.metaKey, 0, null);
+            originalEvent.target.dispatchEvent(event);
+            event.preventDefault();         
+        });
+    }
+}
+
+init();
+})();

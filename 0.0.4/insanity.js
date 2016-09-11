@@ -1,10 +1,10 @@
-localStorage.level4 = localStorage.level4 || 1;
+localStorage.level3 = localStorage.level3 || 1;
 numBlocks = 9;
 mode = 'dynamic'
-if(!localStorage.played)localStorage.level4 = 1;
-level4 = localStorage.level4;
+if(!localStorage.played)localStorage.level3 = 1;
+level3 = localStorage.level3;
 version = '0.0.4';
-//alert('Insanity Puzzle Mode(Dynamic)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful');
+//alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
 swapInterval = 500;
 if (!String.prototype.includes) {
   String.prototype.includes = function(search, start) {
@@ -41,7 +41,7 @@ window.onload = function(){
 	var size = screen.width;
 	if(size > screen.height)size = screen.height;
 	size *= 0.7;
-	lev(level4-1);
+	lev(level3-1);
 	name = gbid('name').innerHTML;
 	text = '';
 	cLet = 0;
@@ -75,7 +75,7 @@ function lev(n){
 	swapInterval = levs[n][1];
 	var size = screen.width;
 	if(size > screen.height)size = screen.height;
-	size = Math.floor((size *0.7) / (levs[n][0])+2);
+	size = Math.floor((size *0.7) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
@@ -101,7 +101,7 @@ function setGrids(n,s){
 	rows = n;
 	var elt ='';
 	for(var i = 0; i < n;i++ ){
-		elt += '<tr style="max-height:'+s+';">';
+		elt += '<tr>';
 		for(var j =0;j<n;j++)elt += '<td onmousedown="javascript:currentBlock = '+blockNum(i,j)+'" style="height:'+s+'px;width:'+s+'px;background:'+randColX()+'"></td>';
 	elt += '</tr>';
 	}
@@ -130,6 +130,7 @@ function colAt(x){
 function check(e){
 	e = e || event || window.event;
 	var target = e.target || e.srcElement;
+	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = target;
 	direction = null;
 	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1)direction = 'v';
 	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1)direction = 'h';
@@ -166,10 +167,10 @@ function check(e){
 }
 function levCompletionCheck(){
 	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red' )return;}
-	alert('Level '+ level4+ ' complete');
-	localStorage.level4++;
-	level4 = localStorage.level4;
-	lev(level4-1);
+	alert('Level '+ level3+ ' complete');
+	localStorage.level3++;
+	level3 = localStorage.level3;
+	lev(level3-1);
 }
 colors = ['red','orange','yellow','green','blue','purple','pink'];
 function extractCol(c){
@@ -198,3 +199,29 @@ function shuffle(){
 	while(((b2 == b1) || colAt(b1) == colAt(b2)) && counter < 10 ){b1 = blockNum(1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)),1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)));counter++;}
 	if(counter < 100)swap(b1,b2);}
 }
+(function() {
+function init() {
+    var mouseEventTypes = {
+        touchstart : "mousedown",
+        touchmove : "mousemove",
+        touchend : "mouseup"
+    };
+
+    for (originalType in mouseEventTypes) {
+        document.addEventListener(originalType, function(originalEvent) {
+            if(originalEvent.type == 'click')
+                return;
+            if (originalEvent.type != 'touchstart' && originalEvent.type !='touchend'){
+                originalEvent.preventDefault();
+            }
+            event = document.createEvent("MouseEvents");
+            touch = originalEvent.changedTouches[0];
+            event.initMouseEvent(mouseEventTypes[originalEvent.type], true, true, window, 0, touch.screenX, touch.screenY, touch.clientX, touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey, touch.metaKey, 0, null);
+            originalEvent.target.dispatchEvent(event);
+            event.preventDefault();         
+        });
+    }
+}
+
+init();
+})();

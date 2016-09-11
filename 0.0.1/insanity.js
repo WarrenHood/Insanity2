@@ -42,6 +42,8 @@ window.onload = function(){
 	text = '';
 	cLet = 0;
 	dir = 1;
+	gbid('container').style.width = screen.width*0.7+'px';
+	gbid('container').style.height = screen.width*0.7+'px';
 	for(var i = 0; i < name.length;i++)text += '<span class="let">'+name[i]+'</span>';
 	gbid('name').innerHTML = text;
 	setInterval(nameAnim,50);
@@ -84,7 +86,7 @@ function setGrids(n,s){
 	var elt ='';
 	for(var i = 0; i < n;i++ ){
 		elt += '<tr height="'+s+'">';
-		for(var j =0;j<n;j++)elt += '<td onmousedown="javascript:currentBlock = '+blockNum(i,j)+'" style="min-height:'+s+'px;min-width:'+s+'px;background:'+randColX()+'"></td>';
+		for(var j =0;j<n;j++)elt += '<td onmousedown="javascript:currentBlock = '+blockNum(i,j)+'" style="height:'+s+'px;width:'+s+'px;background:'+randColX()+'"></td>';
 	elt += '</tr>';
 	}
 	grid.innerHTML = elt;
@@ -94,7 +96,7 @@ function randColX(){
 }
 function setCol(n,c){
 	var blocks = gbid('grid').getElementsByTagName('td');
-	blocks[n].style.background = extractCol(c);
+	blocks[n].style.background = extractCol(c) || c;
 }
 function swap(a,b){
 	var blocks = gbid('grid').getElementsByTagName("td");
@@ -150,3 +152,29 @@ function shuffle(){
 	while(((b2 == b1) || colAt(b1) == colAt(b2)) && counter < 10 ){b1 = blockNum(1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)),1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)));counter++;}
 	if(counter < 100)swap(b1,b2);}
 }
+(function() {
+function init() {
+    var mouseEventTypes = {
+        touchstart : "mousedown",
+        touchmove : "mousemove",
+        touchend : "mouseup"
+    };
+
+    for (originalType in mouseEventTypes) {
+        document.addEventListener(originalType, function(originalEvent) {
+            if(originalEvent.type == 'click')
+                return;
+            if (originalEvent.type != 'touchstart' && originalEvent.type !='touchend'){
+                originalEvent.preventDefault();
+            }
+            event = document.createEvent("MouseEvents");
+            touch = originalEvent.changedTouches[0];
+            event.initMouseEvent(mouseEventTypes[originalEvent.type], true, true, window, 0, touch.screenX, touch.screenY, touch.clientX, touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey, touch.metaKey, 0, null);
+            originalEvent.target.dispatchEvent(event);
+            event.preventDefault();         
+        });
+    }
+}
+
+init();
+})();

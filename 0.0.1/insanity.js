@@ -34,8 +34,11 @@ window.onload = function(){
 	gbid('version').innerHTML = version;
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
-	var size = screen.width;
-	if(size > screen.height)size = screen.height;
+
+	var size = document.body.style.width;
+	if(size > document.body.style.height)size = document.body.style.height;
+
+
 	size *= 0.7;
 	lev(level-1);
 	name = gbid('name').innerHTML;
@@ -69,8 +72,14 @@ function lev(n){
 	gbid('lv').innerHTML = (n+1);
 	var elts = '';
 	swapInterval = levs[n][1];
-	var size = screen.width;
-	if(size > screen.height)size = screen.height;
+
+
+
+	var size = document.body.style.width;
+	if(size > document.body.style.height)size = document.body.style.height;
+
+
+
 	size = Math.floor(size *0.7 / levs[n][0]);
 	setGrids(levs[n][0],size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');

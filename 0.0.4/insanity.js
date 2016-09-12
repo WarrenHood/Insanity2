@@ -1,9 +1,9 @@
 localStorage.level3 = localStorage.level3 || 1;
 numBlocks = 9;
-mode = 'dynamic'
+mode = 'dynamic';
 if(!localStorage.played)localStorage.level3 = 1;
 level3 = localStorage.level3;
-version = '0.0.4';
+version = '0.0.3';
 //alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
 swapInterval = 500;
 function gbid(x){return document.getElementById(x);}
@@ -119,8 +119,10 @@ function check(e){
 	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = i;
 	if(!currentBlock)currentBlock = target.id;
 	direction = null;
-	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1)direction = 'v';
-	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1)direction = 'h';
+	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1){
+		if(!(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1))direction = 'v';}
+	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1){
+		if(!(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1))direction = 'h';}
 	else direction = 'both'
 	if(direction == 'v'){
 		startRow = 1;

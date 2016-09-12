@@ -1,6 +1,6 @@
 localStorage.level3 = localStorage.level3 || 1;
 numBlocks = 9;
-mode = 'static'
+mode = 'static';
 if(!localStorage.played)localStorage.level3 = 1;
 level3 = localStorage.level3;
 version = '0.0.3';
@@ -119,8 +119,10 @@ function check(e){
 	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = i;
 	if(!currentBlock)currentBlock = target.id;
 	direction = null;
-	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1)direction = 'v';
-	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1)direction = 'h';
+	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1){
+		if(!(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1))direction = 'v';}
+	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1){
+		if(!(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1))direction = 'h';}
 	else direction = 'both'
 	if(direction == 'v'){
 		startRow = 1;
@@ -187,7 +189,8 @@ function shuffle(){
 	while(((b2 == b1) || colAt(b1) == colAt(b2)) && counter < 10 ){b1 = blockNum(1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)),1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)));counter++;}
 	if(counter < 100)swap(b1,b2);}
 }
-/*(function() {
+/*
+(function() {
 function init() {
     var mouseEventTypes = {
         touchstart : "mousedown",

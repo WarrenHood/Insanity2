@@ -35,8 +35,8 @@ window.onload = function(){
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
 
-	var size = document.body.style.width;
-	if(size > document.body.style.height)size = document.body.style.height;
+	var size = screen.width;
+	if(size > screen.height)size = screen.height;
 
 
 	size *= 0.7;
@@ -74,7 +74,8 @@ function lev(n){
 	swapInterval = levs[n][1];
 
 
-
+	var size = screen.width;
+	if(size > screen.height)size = screen.height;
 	var size = document.body.style.width;
 	if(size > document.body.style.height)size = document.body.style.height;
 

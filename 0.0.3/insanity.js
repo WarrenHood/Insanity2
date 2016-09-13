@@ -26,7 +26,6 @@ window.onload = function(){
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
-	size *= 0.7;
 	lev(level3-1);
 	name = gbid('name').innerHTML;
 	text = '';
@@ -61,7 +60,7 @@ function lev(n){
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
-	size = Math.floor((size *0.7) / (levs[n][0]+2));
+	size = Math.floor((size) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;

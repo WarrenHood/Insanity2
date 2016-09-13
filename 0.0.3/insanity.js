@@ -1,4 +1,5 @@
 localStorage.level3 = localStorage.level3 || 1;
+localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
 numBlocks = 9;
 mode = 'static';
 if(!localStorage.played)localStorage.level3 = 1;
@@ -10,7 +11,6 @@ function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
 	var counter = 0;
-	levCompletionCheck();
 	row = 1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2));
 	col = 1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2));
 		if(mode == 'dynamic'){
@@ -24,7 +24,7 @@ window.onload = function(){
 	gbid('version').innerHTML = version;
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
-	var size = screen.width;
+	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
 	size *= 0.7;
 	lev(level3-1);
@@ -59,7 +59,7 @@ function lev(n){
 	gbid('lv').innerHTML = (n+1);
 	var elts = '';
 	swapInterval = levs[n][1];
-	var size = screen.width;
+	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
 	size = Math.floor((size *0.7) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);

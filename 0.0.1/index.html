@@ -14,7 +14,10 @@ html, body {
 	border:1px solid black;
 	position:relative;
 	table-layout:fixed;
+	width:device-width;
+	height:device-width;
 }
+
 
 
 </style>
@@ -23,7 +26,8 @@ html, body {
 <body>
 <center><h3 style='color:green;'><span id='name'>Insanity</span>(Level <span id='lv'></span>) V<span id='version'></span></h3></center>
 <center>
-<table id='grid'></table>
+<div class='table-wrap'>
+<table id='grid'></table></div>
 </center><br><br>
 <center><button onclick='if(confirm("Do you really wanna restart from lv1? click cancel if u dont.")){level = 1;localStorage.level = 1;lev(0);}'>Restart from level 1</button></center>
 </body>

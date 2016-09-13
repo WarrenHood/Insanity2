@@ -1,4 +1,5 @@
 localStorage.level = localStorage.level || 1;
+localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
 numBlocks = 9;
 if(!localStorage.played)localStorage.level = 1;
 level = localStorage.level;
@@ -23,7 +24,6 @@ function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
 	var counter = 0;
-	levCompletionCheck();
 	var b1 = Math.floor(Math.random()*numBlocks);
 	var b2 = Math.floor(Math.random()*numBlocks);
 	while(((b2 == b1) || colAt(b1) == colAt(b2)) && counter < 10 ){b1 =Math.floor(Math.random()*numBlocks);counter++}
@@ -34,7 +34,7 @@ window.onload = function(){
 	gbid('version').innerHTML = version;
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
-	var size = screen.width;
+	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
 	size *= 0.7;
 	lev(level-1);
@@ -69,7 +69,7 @@ function lev(n){
 	gbid('lv').innerHTML = (n+1);
 	var elts = '';
 	swapInterval = levs[n][1];
-	var size = screen.width;
+	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
 	size = Math.floor(size *0.7 / levs[n][0]);
 	setGrids(levs[n][0],size);
@@ -83,11 +83,13 @@ function setGrids(n,s){
 	numBlocks = Math.pow(n,2);
 	var elt ='';
 	for(var i = 0; i < n;i++ ){
-		elt += '<tr height="'+s+'">';
-		for(var j =0;j<n;j++)elt += '<td onmousedown="javascript:currentBlock = '+blockNum(i,j)+'" style="height:'+s+'px;width:'+s+'px;background:'+randColX()+'"></td>';
+		elt += '<tr height="'+s+'" style="height:'+s+'px;">';
+		for(var j =0;j<n;j++)elt += '<td onmousedown="javascript:currentBlock = '+blockNum(i,j)+'" style="height:'+s+'px;width:'+s+'px;background:'+randColX()+'"height="'+s+'"></td>';
 	elt += '</tr>';
 	}
 	grid.innerHTML = elt;
+	grid.style.height = n*s+'px';
+	grid.style.width = n*s+'px';
 }
 function randColX(){
 	return ['orange','yellow','green','blue','purple','pink'][Math.floor(Math.random() * 6 )];
@@ -158,6 +160,7 @@ function init() {
         touchmove : "mousemove",
         touchend : "mouseup"
     };
+
     for (originalType in mouseEventTypes) {
         document.addEventListener(originalType, function(originalEvent) {
             if(originalEvent.type == 'click')
@@ -173,6 +176,7 @@ function init() {
         });
     }
 }
+
 init();
 })();
 */

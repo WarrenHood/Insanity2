@@ -1,16 +1,16 @@
 localStorage.level3 = localStorage.level3 || 1;
+localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
 numBlocks = 9;
-mode = 'dynamic'
+mode = 'dynamic';
 if(!localStorage.played)localStorage.level3 = 1;
 level3 = localStorage.level3;
-version = '0.0.4';
+version = '0.0.3';
 //alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
 swapInterval = 500;
 function gbid(x){return document.getElementById(x);}
 function gbtname(x){return document.getElementsByTagName(x);}
 function animate(){
 	var counter = 0;
-	levCompletionCheck();
 	row = 1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2));
 	col = 1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2));
 		if(mode == 'dynamic'){
@@ -24,7 +24,7 @@ window.onload = function(){
 	gbid('version').innerHTML = version;
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
-	var size = screen.width;
+	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
 	size *= 0.7;
 	lev(level3-1);
@@ -44,8 +44,8 @@ function nameAnim(){
 	if(cLet >= name.length){dir = -1;cLet = name.length - 1;}
 	if(cLet < 0){dir = 1;cLet = 1;}
 	for(var j = 0;j < name.length;j++){	nameLet[j].style.color = 'green';
-	nameLet[j].style.background = 'black';}
-	nameLet[cLet].style.background = 'yellow';
+	nameLet[j].style.backgroundColor = 'black';}
+	nameLet[cLet].style.backgroundColor = 'yellow';
 	nameLet[cLet].style.color = 'white';
 	cLet += dir;
 	
@@ -59,7 +59,7 @@ function lev(n){
 	gbid('lv').innerHTML = (n+1);
 	var elts = '';
 	swapInterval = levs[n][1];
-	var size = screen.width;
+	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
 	size = Math.floor((size *0.7) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
@@ -98,19 +98,19 @@ function randColX(){
 }
 function setCol(n,c){
 	var blocks = gbid('grid').getElementsByTagName('td');
-	blocks[n].style.background = extractCol(c);
+	blocks[n].style.backgroundColor = extractCol(c);
 }
 function swap(a,b){
 	var blocks = gbid('grid').getElementsByTagName("td");
-	var ca = extractCol(blocks[a].style.background);
-	var cb = extractCol(blocks[b].style.background);
-	blocks[a].style.background = cb;
-	blocks[b].style.background = ca;
+	var ca = extractCol(blocks[a].style.backgroundColor);
+	var cb = extractCol(blocks[b].style.backgroundColor);
+	blocks[a].style.backgroundColor = cb;
+	blocks[b].style.backgroundColor = ca;
 }
 function colAt(x){
 	var blocks = gbid('grid').getElementsByTagName("td");
 	for(var i = 0; i < colors.length;i++){
-		if(colors[i] == blocks[x].style.background || extractCol(blocks[x].style.background == colors[i] ) == colors[i])return colors[i];
+		if(colors[i] == blocks[x].style.backgroundColor || extractCol(blocks[x].style.backgroundColor == colors[i] ) == colors[i])return colors[i];
 	}
 }
 function check(e){
@@ -119,8 +119,10 @@ function check(e){
 	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = i;
 	if(!currentBlock)currentBlock = target.id;
 	direction = null;
-	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1)direction = 'v';
-	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1)direction = 'h';
+	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1){
+		if(!(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1))direction = 'v';}
+	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1){
+		if(!(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1))direction = 'h';}
 	else direction = 'both'
 	if(direction == 'v'){
 		startRow = 1;
@@ -149,8 +151,8 @@ function check(e){
 			else setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),"red");
 	}
 	levCompletionCheck();
-	//if(target.style.background == "red" || extractCol(target.style.background) == 'red' )target.style.background = randColX();
-	//else target.style.background = "red";
+	//if(target.style.backgroundColor == "red" || extractCol(target.style.backgroundColor) == 'red' )target.style.backgroundColor = randColX();
+	//else target.style.backgroundColor = "red";
 }
 function levCompletionCheck(){
 	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red' )return;}
@@ -187,6 +189,7 @@ function shuffle(){
 	while(((b2 == b1) || colAt(b1) == colAt(b2)) && counter < 10 ){b1 = blockNum(1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)),1 + Math.floor(Math.random()*(Math.sqrt(numBlocks)-2)));counter++;}
 	if(counter < 100)swap(b1,b2);}
 }
+/*
 (function() {
 function init() {
     var mouseEventTypes = {
@@ -212,7 +215,7 @@ function init() {
 }
 
 init();
-})();
+})();*/
  String.prototype.includes = function(search, start) {
     'use strict';
     if (typeof start !== 'number') {

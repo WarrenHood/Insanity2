@@ -62,6 +62,7 @@ if(localStorage.seen == 'false' || localStorage.seen == false){
 	g('help').onclick = function(){alert(msg);
 	}
 	g('rhs').onclick = setWidth;
+g('rhs').ontouchmove = setWidth;
 	g('add').onclick = upIt;
 	g('minus').onclick = downIt;
 	updateD();

@@ -95,7 +95,7 @@ function setWidth(e){
 	console.log(screen.width - x);
 	load(cModeNum);
 }
-localStorage.topD = -100;
+localStorage.topD = localStorage.topD || 0;
 function upIt(){localStorage.topD = parseInt(localStorage.topD) -10;updateD();}
 function downIt(){localStorage.topD = parseInt(localStorage.topD)+10;updateD();}
 function updateD(){

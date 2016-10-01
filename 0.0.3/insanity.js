@@ -62,7 +62,7 @@ function lev(n){
 	if(size > screen.height)size = screen.height;
 	size = Math.floor((size) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
-	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
+	for(var i = 0; i < Math.floor(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
 	setCol(blockNum(0,0),'black');
 	setCol(blockNum(0,rows-1),'black');

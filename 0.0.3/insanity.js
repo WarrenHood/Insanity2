@@ -123,22 +123,22 @@ function check(e){
 	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1){
 		if(!(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1))direction = 'h';}
 	else direction = 'both'
-	if(direction == 'v'){
+	/*if(direction == 'v'){
 		startRow = 1;
 		endRow = rows-1;
 		for(var r = startRow;r<endRow;r++){
 			if(colAt(blockNum(r,colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(r,colNum(currentBlock)))) == 'red' )setCol(blockNum(r,colNum(currentBlock)),randColX());
 			else setCol(blockNum(r,colNum(currentBlock)),"red");
 		}
-	}
-	if(direction == 'h'){
+	}*/
+	/*if(direction == 'h'){
 		startRow = 1;
 		endRow = rows-1;
 		for(var r = startRow;r<endRow;r++){
 			if(colAt(blockNum(rowNum(currentBlock),r)) == "red" || extractCol(colAt(blockNum(rowNum(currentBlock),r))) == 'red' )setCol(blockNum(rowNum(currentBlock),r),randColX());
 			else setCol(blockNum(rowNum(currentBlock),r),"red");
 		}
-	}
+	}*/
 	if(direction == 'both'){
 		for(var r = startRow;r<endRow;r++){	
 			if(colAt(blockNum(rowNum(currentBlock),r)) == "red" || extractCol(colAt(blockNum(rowNum(currentBlock),r))) == 'red' )setCol(blockNum(rowNum(currentBlock),r),randColX());
@@ -146,8 +146,8 @@ function check(e){
 			if(colAt(blockNum(r,colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(r,colNum(currentBlock)))) == 'red' )setCol(blockNum(r,colNum(currentBlock)),randColX());
 			else setCol(blockNum(r,colNum(currentBlock)),"red");
 		}
-		/*if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock)))) == 'red' )setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),randColX());
-			else setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),"red");*/
+		if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock)))) == 'red' )setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),randColX());
+			else setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),"red");
 	}
 	levCompletionCheck();
 	//if(target.style.backgroundColor == "red" || extractCol(target.style.backgroundColor) == 'red' )target.style.backgroundColor = randColX();

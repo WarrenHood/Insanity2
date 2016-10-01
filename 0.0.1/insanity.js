@@ -3,7 +3,7 @@ localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
 numBlocks = 9;
 if(!localStorage.played)localStorage.level = 1;
 level = localStorage.level;
-version = '0.0.4';
+version = '0.0.5';
 //alert('Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.');
 swapInterval = 500;
 if (!String.prototype.includes) {

@@ -147,8 +147,8 @@ function check(e){
 			else setCol(blockNum(r,colNum(currentBlock)),"red");
 		}
 		/*if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock)))) == 'red' )setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),randColX());
-			else setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),"red");
-	}*/
+			else setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),"red");*/
+	}
 	levCompletionCheck();
 	//if(target.style.backgroundColor == "red" || extractCol(target.style.backgroundColor) == 'red' )target.style.backgroundColor = randColX();
 	//else target.style.backgroundColor = "red";

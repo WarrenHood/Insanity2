@@ -117,6 +117,7 @@ function colAt(x){
 	for(var i = 0; i < colors.length;i++){
 		if(colors[i] == blocks[x].style.backgroundColor || extractCol(blocks[x].style.backgroundColor == colors[i] ) == colors[i])return colors[i];
 	}
+	return extractCol(blocks[x].backgroundColor) || extractCol(blocks[x].background);
 }
 function check(e){
 	e = e || event || window.event;
@@ -126,6 +127,8 @@ function check(e){
 	direction = null;
 	if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == 'grey'){
 		setCol(currentBlock,"black");
+		target.style.background = 'black';
+		target.style.backgroundColor = 'black';
 	}
 	
 	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1){

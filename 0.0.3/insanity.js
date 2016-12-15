@@ -163,6 +163,11 @@ function check(e){
 		if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock)))) == 'red' )setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),randColX());
 			else setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),"red");
 	}
+	else{
+		setCol(currentBlock,"black");
+		target.style.background = 'black';
+		target.style.backgroundColor = 'black';
+	}
 	levCompletionCheck();
 	//if(target.style.backgroundColor == "red" || extractCol(target.style.backgroundColor) == 'red' )target.style.backgroundColor = randColX();
 	//else target.style.backgroundColor = "red";

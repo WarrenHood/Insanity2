@@ -1,5 +1,5 @@
 localStorage.level = localStorage.level || 1;
-localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
+localStorage.screenwidth = window.innerWidth;
 numBlocks = 9;
 if(!localStorage.played)localStorage.level = 1;
 level = localStorage.level;
@@ -36,6 +36,7 @@ window.onload = function(){
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
+	size *= 0.7;
 	lev(level-1);
 	name = gbid('name').innerHTML;
 	text = '';
@@ -70,7 +71,7 @@ function lev(n){
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
-	size = Math.floor(size/ levs[n][0]);
+	size = Math.floor(size *0.7 / levs[n][0]);
 	setGrids(levs[n][0],size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;

@@ -1,9 +1,9 @@
-localStorage.level4 = localStorage.level4 || 1;
-localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
+localStorage.level5 = localStorage.level5 || 1;
+localStorage.screenwidth = window.innerWidth;
 numBlocks = 9;
 mode = 'dynamic';
-if(!localStorage.played)localStorage.level3 = 1;
-level4 = localStorage.level4;
+if(!localStorage.played)localStorage.level5 = 1;
+level3 = localStorage.level5;
 version = '0.0.5';
 //alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
 swapInterval = 500;
@@ -26,7 +26,8 @@ window.onload = function(){
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
-	lev(level4-1);
+	size *= 0.7;
+	lev(level3-1);
 	name = gbid('name').innerHTML;
 	text = '';
 	cLet = 0;
@@ -60,7 +61,7 @@ function lev(n){
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
-	size = Math.floor((size) / (levs[n][0]+2));
+	size = Math.floor((size *0.7) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
@@ -155,10 +156,10 @@ function check(e){
 }
 function levCompletionCheck(){
 	for(var i = 0; i < numBlocks;i++){if(colAt(i) == 'red' )return;}
-	alert('Level '+ level4+ ' complete');
-	localStorage.level4++;
-	level4 = localStorage.level4;
-	lev(level4-1);
+	alert('Level '+ level3+ ' complete');
+	localStorage.level5++;
+	level3 = localStorage.level5;
+	lev(level3-1);
 }
 colors = ['red','orange','yellow','green','blue','purple','pink'];
 function extractCol(c){

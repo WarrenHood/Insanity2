@@ -21,4 +21,5 @@
   <preference name="fullscreen" value="true" />
   <preference name='uiwebviewbounce' value='false' />
   <icon src='icon.png' height='50' width='50'/>
+<gap:plugin name="org.apache.cordova.inappbrowser" />
 </widget>

@@ -11,49 +11,30 @@ html, body {
 .active{
 background:green;
 border:1px solid black;
-height:4%;
+height:6%;
 color:white;
 }
 .inactive{
 background:red;
 border:1px solid black;
-height:4%;
+height:6%;
 }
 #help{
 background:lightblue;
 border:1px solid grey;
-height:4%;
-}
-#rhs{
-	height:100px;
-	width:100%;
-	background: rgba(300,300,600,0.5);
-
-}
-#diffs{
-	position:relative;
-	z-index:2;
-}
-#add{
-	background:grey;
-	border:1px solid black;
-}
-#minus{
-	background:grey;
-	border:1px solid black;
+height:6%;
 }
 </style>
 <script type='text/javascript'>
-localStorage.seen = localStorage.seen || false;
-
 version = '0.0.5';
+if(localStorage.InsanityVersion != version){
+	localStorage.level3 = 1;
+	localStorage.InsanityVersion = version;
+	alert('Thanks for updating to Insanity version 0.0.5!\n\n Whats new?\n-Fixed sizing of grid so no more setting it manually\n-Puzzle mode(easy) had a flaw which i have dealt with by limiting the number of grey blocks. Ie. the grey block you click on will disappear once tapped on!\n\nThe rest of the game is basically the same\nEnjoy');
+}
 cMode = 'normal';
 alert('Insanity Version '+version+'\nCreated by Warren Hood\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
-if(localStorage.seen == 'false' || localStorage.seen == false){
-	localStorage.seen = true;
-		alert('!!!!!!!!IMPORTANT!!!!!!!!\n\nScroll right down until you see the grey area... Then tap as far on the right of the grey area as you can to set the grid width... If the grid doesn\'t fit on your screen tap a little more left on the grey area.');}
-		
-		window.onload = function(){
+window.onload = function(){
 	msg = 'Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.';
 	playfield = g('playfield');
 	g('normal').onclick = function(){load(1);}
@@ -61,18 +42,13 @@ if(localStorage.seen == 'false' || localStorage.seen == false){
 	g('puzzle2').onclick = function(){load(3);}
 	g('help').onclick = function(){alert(msg);
 	}
-	g('rhs').onclick = setWidth;
-g('rhs').ontouchmove = setWidth;
-	g('add').onclick = upIt;
-	g('minus').onclick = downIt;
-	updateD();
 }
 function load(x){
 	if(x == 1){playfield.src = '0.0.1/index.html';enable('normal');
 			msg = 'Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.';
 	}
 	if(x == 2){playfield.src = '0.0.3/index.html';enable('puzzle1');
-			msg = 'Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.';
+			msg = 'Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. The gray block will then disappear. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.';
 	}
 	if(x == 3){playfield.src = '0.0.4/index.html';enable('puzzle2');
 			msg = 'Insanity Puzzle Mode(Dynamic)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful';
@@ -86,44 +62,17 @@ function enable(n){
 	g(n).className = 'active';
 }
 function g(n){return document.getElementById(n);}
-function setWidth(e){
-	e = e || event;
-	x = e.clientX;
-	localStorage.screenwidth = x;
-	cModeNum = 1;
-	if(cMode == 'puzzle1')cModeNum = 2;
-	if(cMode == 'puzzle2')cModeNum = 3;
-	console.log(screen.width - x);
-	load(cModeNum);
-}
-localStorage.topD = localStorage.topD || 0;
-function upIt(){localStorage.topD = parseInt(localStorage.topD) -10;updateD();}
-function downIt(){localStorage.topD = parseInt(localStorage.topD)+10;updateD();}
-function updateD(){
-g('diffs').style.top = localStorage.topD + 'px';
-}
 </script>
 </head>
 <body>
 <iframe id='playfield' src='0.0.1/index.html' style='height:100%;width:100%;overflow:auto;' scroll='auto'></iframe>
 <center>
-<div id='diffs'>
 <div id='help'>Help</div>
 <div class='active' id='normal'>Normal Mode</div>
 <div class ='inactive' id='puzzle1'>Puzzle Mode(Easy)</div>
 <div class ='inactive' id='puzzle2'>Puzzle Mode(Hard)</div><br>
-
-<span style='color:white;'>Button Positioning<br><br>
-<div id='add'>+</div><div id='minus'>-</div>
-<br><br>Grid Settings<br><br>Tap as far on the right of the grey area as possible to define your grid width...<br><br>
-<div id='rhs'></div><br>
-<a style='text-decoration:none;'href='https://build.phonegap.com/apps/2049693/install'> <span style='font-size:30px;color:blue;height:10%;width:100%;background:green;border:1px solid grey;'>Update</span> </a>
-<br><br><h1>Contact Me</h1><br>
-<a style='color:blue;'href='https://facebook.com/warren.hood.750'> <img src='fb.png' style='height:5%;width:height;'/></a><br>
-Email: nullbyte001@gmail<br>
-
-</span>
-</div>
+<span style='color:white'>Add me on facebook</span><br>
+<a href="#" onclick="window.open('http://www.facebook.com/warren.hood.750', '_system');"><img src='fb.png'/></a>
 </center>
 </body>
 </html>

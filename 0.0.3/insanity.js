@@ -1,7 +1,9 @@
 localStorage.level3 = localStorage.level3 || 1;
-localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
+localStorage.screenwidth = window.innerWidth;
 numBlocks = 9;
 mode = 'static';
+lastClickIn = null;
+lastClickOut = null;
 if(!localStorage.played)localStorage.level3 = 1;
 level3 = localStorage.level3;
 version = '0.0.5';
@@ -26,6 +28,7 @@ window.onload = function(){
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
+	size *= 0.7;
 	lev(level3-1);
 	name = gbid('name').innerHTML;
 	text = '';
@@ -35,6 +38,9 @@ window.onload = function(){
 	gbid('name').innerHTML = text;
 	setInterval(nameAnim,50);
 	animate();
+}
+function restartLevel(){
+	lev(level3-1);
 }
 function nameAnim(){
 	nameLet = document.getElementsByClassName('let');
@@ -60,9 +66,9 @@ function lev(n){
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
 	if(size > screen.height)size = screen.height;
-	size = Math.floor((size) / (levs[n][0]+2));
+	size = Math.floor((size *0.7) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
-	for(var i = 0; i < 2*rows-1;i++)setCol(i,'red');
+	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
 	setCol(blockNum(0,0),'black');
 	setCol(blockNum(0,rows-1),'black');
@@ -118,6 +124,10 @@ function check(e){
 	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = i;
 	if(!currentBlock)currentBlock = target.id;
 	direction = null;
+	if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == 'grey'){
+		setCol(currentBlock,"black");
+	}
+	
 	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1){
 		if(!(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1))direction = 'v';}
 	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1){
@@ -130,7 +140,7 @@ function check(e){
 			if(colAt(blockNum(r,colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(r,colNum(currentBlock)))) == 'red' )setCol(blockNum(r,colNum(currentBlock)),randColX());
 			else setCol(blockNum(r,colNum(currentBlock)),"red");
 		}
-           }
+	}
 	if(direction == 'h'){
 		startRow = 1;
 		endRow = rows-1;
@@ -160,10 +170,10 @@ function levCompletionCheck(){
 	level3 = localStorage.level3;
 	lev(level3-1);
 }
-colors = ['red','orange','yellow','green','blue','purple','pink'];
+colors = ['red','orange','yellow','green','blue','purple','pink','grey','black'];
 function extractCol(c){
 	str = ''+c;
-	colors = ['red','orange','yellow','green','blue','purple','pink'];
+	colors = ['red','orange','yellow','green','blue','purple','pink','grey','black'];
 	for(i = 0;i<colors.length;i++){
 		if(colors[i] == str || str.includes(colors[i]))return colors[i];
 	}

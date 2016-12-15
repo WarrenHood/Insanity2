@@ -27,7 +27,7 @@ window.onload = function(){
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = localStorage.screenwidth;
-	if(size > screen.height)size = screen.height;
+	if(size > window.innerHeight)size = window.innerHeight;
 	size *= 0.7;
 	lev(level3-1);
 	name = gbid('name').innerHTML;
@@ -65,7 +65,7 @@ function lev(n){
 	var elts = '';
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
-	if(size > screen.height)size = screen.height;
+	if(size > window.innerHeight)size = window.innerHeight;
 	size = Math.floor((size *0.7) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
@@ -125,17 +125,18 @@ function check(e){
 	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = i;
 	if(!currentBlock)currentBlock = target.id;
 	direction = null;
-	if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == 'grey'){
-		setCol(currentBlock,"black");
-		target.style.background = 'black';
-		target.style.backgroundColor = 'black';
-	}
 	
 	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1){
 		if(!(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1))direction = 'v';}
 	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1){
 		if(!(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1))direction = 'h';}
-	else direction = 'both'
+	else direction = 'both';
+	if(direction != 'both' && colAt(currentBlock) != 'grey')return;
+	if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == 'grey'){
+		setCol(currentBlock,"black");
+		target.style.background = 'black';
+		target.style.backgroundColor = 'black';
+	}
 	if(direction == 'v'){
 		startRow = 1;
 		endRow = rows-1;

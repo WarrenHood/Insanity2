@@ -35,7 +35,7 @@ window.onload = function(){
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = localStorage.screenwidth;
-	if(size > screen.height)size = screen.height;
+	if(size > window.innerHeight)size = window.innerHeight;
 	size *= 0.7;
 	lev(level-1);
 	name = gbid('name').innerHTML;
@@ -70,7 +70,7 @@ function lev(n){
 	var elts = '';
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
-	if(size > screen.height)size = screen.height;
+	if(size > window.innerHeight)size = window.innerHeight;
 	size = Math.floor(size *0.7 / levs[n][0]);
 	setGrids(levs[n][0],size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');

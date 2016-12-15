@@ -38,6 +38,7 @@ height:6%;
 }
 </style>
 <script type='text/javascript'>
+window.open = cordova.InAppBrowser.open;
 version = '0.0.5';
 if(localStorage.InsanityVersion != version){
 	localStorage.level3 = 1;

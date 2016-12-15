@@ -38,7 +38,6 @@ height:6%;
 }
 </style>
 <script type='text/javascript'>
-window.open = cordova.InAppBrowser.open;
 version = '0.0.5';
 if(localStorage.InsanityVersion != version){
 	localStorage.level3 = 1;
@@ -75,6 +74,11 @@ function enable(n){
 	g(n).className = 'active';
 }
 function g(n){return document.getElementById(n);}
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    window.open = cordova.InAppBrowser.open;
+}
+
 </script>
 </head>
 <body>

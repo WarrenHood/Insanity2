@@ -3,7 +3,7 @@
         xmlns:gap   = ""
         id          = "com.warren.insanity"
         versionCode = "001" 
-        version     = "0.0.3" >
+        version     = "0.0.5" >
 
     <!-- versionCode is optional and Android only -->
 

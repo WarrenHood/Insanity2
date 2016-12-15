@@ -1,6 +1,9 @@
 <html>
 <head><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <style>
+a{
+	text-decoration:none;
+}
 html, body {
     width: 100%;
     height: 100%;
@@ -23,6 +26,15 @@ height:6%;
 background:lightblue;
 border:1px solid grey;
 height:6%;
+}
+#updater{
+	height:6%;
+	font-size:30;
+	background:rgba(0,200,200,0.5);
+	border:1px solid green;
+	text-decoration:none;
+	color:white;
+	text-align:center;
 }
 </style>
 <script type='text/javascript'>
@@ -72,7 +84,8 @@ function g(n){return document.getElementById(n);}
 <div class ='inactive' id='puzzle1'>Puzzle Mode(Easy)</div>
 <div class ='inactive' id='puzzle2'>Puzzle Mode(Hard)</div><br>
 <span style='color:white'>Add me on facebook</span><br>
-<a href="#" onclick="window.open('http://www.facebook.com/warren.hood.750', '_system');"><img src='fb.png'/></a>
-</center>
+<a href="#" onclick="window.open('http://www.facebook.com/warren.hood.750', '_system');"><img src='fb.png'/></a><br><br>
+<a href="#" onclick="window.open('https://build.phonegap.com/apps/2049693/install', '_system');"><span id='updater'>Update<span></a>
+<br></center>
 </body>
 </html>

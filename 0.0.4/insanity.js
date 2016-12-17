@@ -4,7 +4,7 @@ numBlocks = 9;
 mode = 'dynamic';
 if(!localStorage.played)localStorage.level5 = 1;
 level3 = localStorage.level5;
-version = '0.0.5';
+version = '0.0.6';
 //alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
 swapInterval = 500;
 function gbid(x){return document.getElementById(x);}

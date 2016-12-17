@@ -4,7 +4,24 @@
 a{
 	text-decoration:none;
 }
+#container{
+	position:relative;
+	background:black;
+	top:76%;
+}
+#menu{
+z-index:2;
+position:absolute;
+height:100%;
+width:100%;
+top:0px;
+left:0px;
+background-image:url('cover.jpg');
+background-size:100% 100%;
+background-repeat: no-repeat;
+}
 html, body {
+overflow:hidden;
     width: 100%;
     height: 100%;
     padding: 0;
@@ -36,24 +53,44 @@ height:6%;
 	color:white;
 	text-align:center;
 }
+#openMenu{
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	z-index:1;
+	color:black;
+	background:beige;
+	font-size:30;
+}
 </style>
 <script type='text/javascript'>
-version = '0.0.5';
+version = '0.0.6';
 if(localStorage.InsanityVersion != version){
-	localStorage.level3 = 1;
 	localStorage.InsanityVersion = version;
-	alert('Thanks for updating to Insanity version 0.0.5!\n\n Whats new?\n-Fixed sizing of grid so no more setting it manually\n-Puzzle mode(easy) had a flaw which i have dealt with by limiting the number of grey blocks. Ie. the grey block you click on will disappear once tapped on!\n\nThe rest of the game is basically the same\nEnjoy');
+	alert('Thanks for updating to Insanity version 0.0.6!\n\n Whats new?\n-Fixed sizing of grid so no more setting it manually\n-Puzzle mode(easy) had a flaw which i have dealt with by limiting the number of grey blocks. Ie. the grey block you click on will disappear once tapped on!\nA menu has been added\n\nEnjoy');
 }
 cMode = 'normal';
 alert('Insanity Version '+version+'\nCreated by Warren Hood\n\nSuggestions? Email me:\nnullbyte001@gmail.com');
 window.onload = function(){
 	msg = 'Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.';
 	playfield = g('playfield');
+	menu = g('menu');
+	menu.style.left = '0px';
+	oM = g('openMenu');
+	oM.onclick = showMenu;
 	g('normal').onclick = function(){load(1);}
 	g('puzzle1').onclick = function(){load(2);}
 	g('puzzle2').onclick = function(){load(3);}
 	g('help').onclick = function(){alert(msg);
 	}
+}
+
+function hideMenu(){
+	setTimeout(function(){menu.style.left = -window.innerWidth + 'px';},50);
+
+}
+function showMenu(){
+	setTimeout(function(){menu.style.left = '0px';},100);
 }
 function load(x){
 	if(x == 1){playfield.src = '0.0.1/index.html';enable('normal');
@@ -65,6 +102,7 @@ function load(x){
 	if(x == 3){playfield.src = '0.0.4/index.html';enable('puzzle2');
 			msg = 'Insanity Puzzle Mode(Dynamic)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful';
 	}
+	hideMenu();
 }
 function enable(n){
 	cMode = n;
@@ -88,10 +126,12 @@ function onDeviceReady() {
 <body>
 <iframe id='playfield' src='0.0.1/index.html' style='height:100%;width:100%;overflow:auto;' scroll='auto'></iframe>
 <center>
+<div id='menu'>
+<div id='container'>
 <div id='help'>Help</div>
-<div class='active' id='normal'>Normal Mode</div>
+<div class='inactive' id='normal'>Normal Mode</div>
 <div class ='inactive' id='puzzle1'>Puzzle Mode(Easy)</div>
-<div class ='inactive' id='puzzle2'>Puzzle Mode(Hard)</div><br>
-<br></center>
+<div class ='inactive' id='puzzle2'>Puzzle Mode(Hard)</div></div>
+</div><div id='openMenu'>Menu</div></center>
 </body>
 </html>

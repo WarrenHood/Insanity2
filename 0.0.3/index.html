@@ -9,6 +9,7 @@ html, body {
     padding: 0;
     margin: 0;
 	background:black;
+	overflow:hidden;
 }
 #grid{
 	border:1px solid black;
@@ -27,6 +28,6 @@ border-radius:10px;
 <center><h3 style='color:green;'><span id='name'>Insanity</span>(Level <span id='lv'></span>) V<span id='version'></span></h3></center>
 <center>
 <table id='grid'></table></center><br><br>
-<center><button onclick='if(confirm("Do you really wanna restart from lv1? click cancel if u dont.")){level3 = 1;localStorage.level3 = 1;lev(0);}'>Restart from level 1</button></center>
+<center><button onclick='if(confirm("Do you really wanna restart the current level? click cancel if u dont.")){restartLevel();}'>Restart this level</button><br><br><button onclick='if(confirm("Do you really wanna restart from lv1? click cancel if u dont.")){level3 = 1;localStorage.level3 = 1;lev(0);}'>Restart from level 1</button></center>
 </body>
 </html>

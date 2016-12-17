@@ -2,8 +2,8 @@
     <widget xmlns   = ""
         xmlns:gap   = ""
         id          = "com.warren.insanity"
-        versionCode = "001" 
-        version     = "0.0.3" >
+        versionCode = "006" 
+        version     = "0.0.6" >
 
     <!-- versionCode is optional and Android only -->
 
@@ -21,4 +21,5 @@
   <preference name="fullscreen" value="true" />
   <preference name='uiwebviewbounce' value='false' />
   <icon src='icon.png' height='50' width='50'/>
+<plugin name="org.apache.cordova.inappbrowser" source="npm"/>
 </widget>

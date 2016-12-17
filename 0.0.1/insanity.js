@@ -1,9 +1,9 @@
 localStorage.level = localStorage.level || 1;
-localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
+localStorage.screenwidth = window.innerWidth;
 numBlocks = 9;
 if(!localStorage.played)localStorage.level = 1;
 level = localStorage.level;
-version = '0.0.3';
+version = '0.0.6';
 //alert('Insanity Normal Mode\n\nHow to Play\n\nTap the red blocks to change their colour. If you tap a non-red block it will become red.The aim of the game is to eliminate all red blocks. The blocks will constantly change positions, so be careful.');
 swapInterval = 500;
 if (!String.prototype.includes) {
@@ -35,8 +35,7 @@ window.onload = function(){
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = localStorage.screenwidth;
-	if(size > screen.height)size = screen.height;
-	size *= 0.7;
+	if(size > window.innerHeight)size = window.innerHeight;
 	lev(level-1);
 	name = gbid('name').innerHTML;
 	text = '';
@@ -70,8 +69,8 @@ function lev(n){
 	var elts = '';
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
-	if(size > screen.height)size = screen.height;
-	size = Math.floor(size *0.7 / levs[n][0]);
+	if(size > window.innerHeight)size = window.innerHeight;
+	size = Math.floor(size*0.85 / levs[n][0]);
 	setGrids(levs[n][0],size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;

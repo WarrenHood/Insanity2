@@ -1,10 +1,12 @@
 localStorage.level3 = localStorage.level3 || 1;
-localStorage.screenwidth = localStorage.screenwidth || localStorage.screenwidth;
+localStorage.screenwidth = window.innerWidth;
 numBlocks = 9;
 mode = 'static';
+lastClickIn = null;
+lastClickOut = null;
 if(!localStorage.played)localStorage.level3 = 1;
 level3 = localStorage.level3;
-version = '0.0.3';
+version = '0.0.6';
 //alert('Insanity Puzzle Mode(Static)\n\nHow to Play\n\nTap the gray blocks to invert the colour of everything in its row or column. Tapping any inner block will result in all blocks in the colum and row of the tapped block. The aim of the game is to eliminate all red blocks.');
 swapInterval = 500;
 function gbid(x){return document.getElementById(x);}
@@ -25,8 +27,7 @@ window.onload = function(){
 	localStorage.played = true;
 	var blocks = gbid('grid').getElementsByTagName('td');
 	var size = localStorage.screenwidth;
-	if(size > screen.height)size = screen.height;
-	size *= 0.7;
+	if(size > window.innerHeight)size = window.innerHeight;
 	lev(level3-1);
 	name = gbid('name').innerHTML;
 	text = '';
@@ -36,6 +37,9 @@ window.onload = function(){
 	gbid('name').innerHTML = text;
 	setInterval(nameAnim,50);
 	animate();
+}
+function restartLevel(){
+	lev(level3-1);
 }
 function nameAnim(){
 	nameLet = document.getElementsByClassName('let');
@@ -60,8 +64,8 @@ function lev(n){
 	var elts = '';
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
-	if(size > screen.height)size = screen.height;
-	size = Math.floor((size *0.7) / (levs[n][0]+2));
+	if(size > window.innerHeight)size = window.innerHeight;
+	size = Math.floor((size *0.85) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
@@ -112,18 +116,26 @@ function colAt(x){
 	for(var i = 0; i < colors.length;i++){
 		if(colors[i] == blocks[x].style.backgroundColor || extractCol(blocks[x].style.backgroundColor == colors[i] ) == colors[i])return colors[i];
 	}
+	return extractCol(blocks[x].backgroundColor) || extractCol(blocks[x].background);
 }
 function check(e){
+	if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == 'black')return;
 	e = e || event || window.event;
 	var target = e.target || e.srcElement;
 	for(var i =0;i<numBlocks;i++)if(gbid(i) == target)currentBlock = i;
 	if(!currentBlock)currentBlock = target.id;
 	direction = null;
+	
 	if(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1){
 		if(!(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1))direction = 'v';}
 	else if(colNum(currentBlock) == 0 || colNum(currentBlock) == rows-1){
 		if(!(rowNum(currentBlock) == 0 || rowNum(currentBlock) == rows-1))direction = 'h';}
-	else direction = 'both'
+	else direction = 'both';
+	if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == 'grey'){
+		setCol(currentBlock,"black");
+		target.style.background = 'black';
+		target.style.backgroundColor = 'black';
+	}
 	if(direction == 'v'){
 		startRow = 1;
 		endRow = rows-1;
@@ -150,6 +162,11 @@ function check(e){
 		if(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock))) == "red" || extractCol(colAt(blockNum(rowNum(currentBlock),colNum(currentBlock)))) == 'red' )setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),randColX());
 			else setCol(blockNum(rowNum(currentBlock),colNum(currentBlock)),"red");
 	}
+	else{
+		setCol(currentBlock,"black");
+		target.style.background = 'black';
+		target.style.backgroundColor = 'black';
+	}
 	levCompletionCheck();
 	//if(target.style.backgroundColor == "red" || extractCol(target.style.backgroundColor) == 'red' )target.style.backgroundColor = randColX();
 	//else target.style.backgroundColor = "red";
@@ -161,10 +178,10 @@ function levCompletionCheck(){
 	level3 = localStorage.level3;
 	lev(level3-1);
 }
-colors = ['red','orange','yellow','green','blue','purple','pink'];
+colors = ['red','orange','yellow','green','blue','purple','pink','grey','black'];
 function extractCol(c){
 	str = ''+c;
-	colors = ['red','orange','yellow','green','blue','purple','pink'];
+	colors = ['red','orange','yellow','green','blue','purple','pink','grey','black'];
 	for(i = 0;i<colors.length;i++){
 		if(colors[i] == str || str.includes(colors[i]))return colors[i];
 	}

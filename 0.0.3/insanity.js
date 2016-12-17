@@ -65,7 +65,7 @@ function lev(n){
 	swapInterval = levs[n][1];
 	var size = localStorage.screenwidth;
 	if(size > window.innerHeight)size = window.innerHeight;
-	size = Math.floor((size *0.85) / (levs[n][0]+2));
+	size = Math.floor((size *0.9) / (levs[n][0]+2));
 	setGrids(levs[n][0]+2,size);
 	for(var i = 0; i < Math.ceil(numBlocks/2);i++)setCol(i,'red');
 	for(var i = 0;i < numBlocks;i++)blocks[i].onclick = check;
